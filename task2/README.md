@@ -13,3 +13,8 @@
 数据集采用gaussic的数据集，https://github.com/gaussic/text-classification-cnn-rnn<br />
 链接: https://pan.baidu.com/s/1hugrfRu 密码: qfud<br />
 下载所有文件，放到cnews目录下即可<br />
+
+## 运行
+
+训练：python torch_train.py<br />
+测试：python torch_test.py <br />

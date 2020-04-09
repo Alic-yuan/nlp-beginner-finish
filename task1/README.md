@@ -13,6 +13,11 @@
 链接: https://pan.baidu.com/s/1hugrfRu 密码: qfud<br />
 下载文件中的cnews.train.txt，放到data目录下即可<br />
 
+## 运行
+
+训练：python main.py<br />
+单条语句测试：python predict.py <br />
+
 ## 借鉴项目地址
 
 https://github.com/duguiming111/tensorflow-logistics-regression

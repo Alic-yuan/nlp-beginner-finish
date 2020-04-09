@@ -124,5 +124,5 @@ class ChineseNER(object):
 
 if __name__ == '__main__':
     cn = ChineseNER()
-    # cn.train()
-    cn.predict('ns')
+    cn.train()
+    # cn.predict('ns')
