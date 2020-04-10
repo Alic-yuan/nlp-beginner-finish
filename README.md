@@ -9,3 +9,4 @@
 ### [任务二：基于深度学习的文本分类](https://github.com/Alic-yuan/nlp-beginner-finish/tree/master/task2)<br />
 ### [任务三：基于注意力机制的文本匹配](https://github.com/Alic-yuan/nlp-beginner-finish/tree/master/task3)<br />
 ### [任务四：基于LSTM+CRF的序列标注](https://github.com/Alic-yuan/nlp-beginner-finish/tree/master/task4)<br />
+### [任务五：基于神经网络的语言模型](https://github.com/Alic-yuan/nlp-beginner-finish/tree/master/task5)<br />
