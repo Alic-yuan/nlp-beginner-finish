@@ -7,12 +7,12 @@ import numpy as np
 import tensorflow.keras as kr
 import os
 
-if sys.version_info[0] > 2:
-    is_py3 = True
-else:
+try:
     reload(sys)
     sys.setdefaultencoding("utf-8")
     is_py3 = False
+except NameError:
+    is_py3 = True
 
 
 def native_word(word, encoding='utf-8'):
