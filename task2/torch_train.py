@@ -12,8 +12,8 @@ import numpy as np
 from torch_model import TextRNN, TextCNN
 from cnews_loader import read_vocab, read_category, batch_iter, process_file, build_vocab
 
-def evaluate(model, Loss, optimizer, x_val, y_val):
-    """测试集上准曲率评估"""
+def evaluate(model, Loss, x_val, y_val):
+    """测试集上准确率评估"""
     batch_val = batch_iter(x_val, y_val, 64)
     acc = 0
     los = 0
@@ -28,9 +28,9 @@ def evaluate(model, Loss, optimizer, x_val, y_val):
         # y = Variable(y)
         out = model(x)
         loss = Loss(out, y)
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        # optimizer.zero_grad()
+        # loss.backward()
+        # optimizer.step()
         loss_value = np.mean(loss.detach().numpy())
         accracy = np.mean((torch.argmax(out, 1) == torch.argmax(y, 1)).numpy())
         acc +=accracy*size
