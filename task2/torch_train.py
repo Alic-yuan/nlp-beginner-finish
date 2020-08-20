@@ -16,7 +16,7 @@ def evaluate(model, Loss, x_val, y_val):
     batch_val = batch_iter(x_val, y_val, 64)
     acc = 0
     los = 0
-    model.eval()
+    model.eval()   #开启验证模式，关闭dropout等
     with torch.no_grad():
         for x_batch, y_batch in batch_val:
             size = len(x_batch)
@@ -36,7 +36,7 @@ def evaluate(model, Loss, x_val, y_val):
             accracy = np.mean((torch.argmax(out, 1) == torch.argmax(y, 1)).numpy())
             acc +=accracy*size
             los +=loss_value*size
-        model.train()
+        model.train()  #验证完成后，恢复训练模式
         return los/len(x_val), acc/len(x_val)
 
 
