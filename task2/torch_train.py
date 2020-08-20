@@ -32,7 +32,7 @@ def evaluate(model, Loss, x_val, y_val):
             # optimizer.zero_grad()
             # loss.backward()
             # optimizer.step()
-            loss_value = np.mean(loss.detach().numpy())
+            loss_value = np.mean(loss.numpy())
             accracy = np.mean((torch.argmax(out, 1) == torch.argmax(y, 1)).numpy())
             acc +=accracy*size
             los +=loss_value*size
