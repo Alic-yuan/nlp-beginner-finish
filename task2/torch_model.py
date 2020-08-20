@@ -18,7 +18,7 @@ class TextRNN(nn.Module):
         self.rnn = nn.LSTM(input_size=64, hidden_size=128, bidirectional=True)
         # self.rnn = nn.GRU(input_size=64, hidden_size=128, num_layers=2, bidirectional=True)
         self.f1 = nn.Sequential(nn.Linear(256, 10),
-                                nn.Softmax())
+                                nn.Softmax(-1))
 
     def forward(self, x):
         x = self.embedding(x) # batch_size x text_len x embedding_size 64*600*64
