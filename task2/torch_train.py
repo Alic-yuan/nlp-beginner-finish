@@ -81,7 +81,7 @@ def train():
 
             # 对模型进行验证
             if i % 90 == 0:
-                los, accracy = evaluate(model, Loss,  x_val, y_val)
+                los, accracy = evaluate(model, Loss,  x_val, y_val)  # 此处不需要优化器参数
                 print('loss:{},accracy:{}'.format(los, accracy))
                 if accracy > best_val_acc:
                     torch.save(model.state_dict(), 'model_params.pkl')
