@@ -4,7 +4,6 @@ from __future__ import print_function
 import torch
 from torch import nn
 from torch import optim
-from torch.autograd import Variable
 import os
 
 import numpy as np
@@ -17,25 +16,28 @@ def evaluate(model, Loss, x_val, y_val):
     batch_val = batch_iter(x_val, y_val, 64)
     acc = 0
     los = 0
-    for x_batch, y_batch in batch_val:
-        size = len(x_batch)
-        x = np.array(x_batch)
-        y = np.array(y_batch)
-        x = torch.LongTensor(x)
-        y = torch.Tensor(y)
-        # y = torch.LongTensor(y)
-        # x = Variable(x)
-        # y = Variable(y)
-        out = model(x)
-        loss = Loss(out, y)
-        # optimizer.zero_grad()
-        # loss.backward()
-        # optimizer.step()
-        loss_value = np.mean(loss.detach().numpy())
-        accracy = np.mean((torch.argmax(out, 1) == torch.argmax(y, 1)).numpy())
-        acc +=accracy*size
-        los +=loss_value*size
-    return los/len(x_val), acc/len(x_val)
+    model.eval()   
+    with torch.no_grad():
+        for x_batch, y_batch in batch_val:
+            size = len(x_batch)
+            x = np.array(x_batch)
+            y = np.array(y_batch)
+            x = torch.LongTensor(x)
+            y = torch.Tensor(y)
+            # y = torch.LongTensor(y)
+            # x = Variable(x)
+            # y = Variable(y)
+            out = model(x)
+            loss = Loss(out, y)
+            # optimizer.zero_grad()
+            # loss.backward()
+            # optimizer.step()
+            loss_value = np.mean(loss.numpy())
+            accracy = np.mean((torch.argmax(out, 1) == torch.argmax(y, 1)).numpy())
+            acc +=accracy*size
+            los +=loss_value*size
+        model.train()  
+        return los/len(x_val), acc/len(x_val)
 
 
 base_dir = 'cnews'
@@ -49,6 +51,7 @@ def train():
     x_val, y_val = process_file(val_dir, word_to_id, cat_to_id,600)
     #使用LSTM或者CNN
     model = TextRNN()
+    model.train()
     # model = TextCNN()
     #选择损失函数
     Loss = nn.MultiLabelSoftMarginLoss()
@@ -78,7 +81,7 @@ def train():
 
             # 对模型进行验证
             if i % 90 == 0:
-                los, accracy = evaluate(model, Loss, optimizer, x_val, y_val)
+                los, accracy = evaluate(model, Loss,  x_val, y_val)  # 此处不需要优化器参数
                 print('loss:{},accracy:{}'.format(los, accracy))
                 if accracy > best_val_acc:
                     torch.save(model.state_dict(), 'model_params.pkl')

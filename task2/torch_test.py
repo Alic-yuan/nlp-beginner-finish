@@ -8,7 +8,6 @@ import torch
 from torch import nn
 from cnews_loader import read_category, read_vocab
 from torch_model import TextCNN,TextRNN
-from torch.autograd import Variable
 import numpy as np
 
 try:
