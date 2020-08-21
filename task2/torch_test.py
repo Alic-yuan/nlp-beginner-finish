@@ -25,7 +25,6 @@ class CnnModel:
         self.words, self.word_to_id = read_vocab(vocab_dir)
         self.model = TextCNN()
         self.model.load_state_dict(torch.load('model_params.pkl'))
-        self.model.eval()  # 开启验证模式
 
     def predict(self, message):
         # 支持不论在python2还是python3下训练的模型都可以在2或者3的环境下运行
@@ -45,7 +44,6 @@ class RnnModel:
         self.words, self.word_to_id = read_vocab(vocab_dir)
         self.model = TextRNN()
         self.model.load_state_dict(torch.load('model_params.pkl'))
-        self.model.eval()  # 开启验证模式
 
     def predict(self, message):
         # 支持不论在python2还是python3下训练的模型都可以在2或者3的环境下运行
